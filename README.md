@@ -1,7 +1,7 @@
 Serverless Local Alexa Server Plugin (Beta)
 =======
 
-This plugin exposes your Alexa skill functions as local HTTP endpoints to speed up your development. You can then connect your Alexa skill to these endpoints via forwardhq, ngrok or any other forwarding tool.
+This plugin exposes your Alexa skill functions as local HTTP endpoints, removing the need to deploy every change to AWS Lambda. You can connect these endpoints to your Alexa skill to via forwardhq, ngrok or any other forwarding tool.
 
 This package requires node >= 6.0
 
@@ -67,14 +67,14 @@ In the Configuration pane, select HTTPS as service endpoint type and specify the
 As method for SSL Certificate validation select *My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority*.
 
 
+# TODO
+
+* Automatic tests
+* Support for environment variables
+
+
 # License & Credits
 
 Licensed under the MIT license.
 
 Created and maintained by [DieProduktMacher](http://www.dieproduktmacher.com).
-
-
-# TODO
-
-* Automatic tests
-* Support for environment variables
