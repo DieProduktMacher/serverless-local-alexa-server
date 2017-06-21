@@ -29,24 +29,24 @@ describe('index.js', () => {
   it('should start a server', () => {
     alexaDevServer = new AlexaDevServer(serverless)
     // TODO: Write tests
-    return alexaDevServer.hooks['alexa-dev-server:start']()
+    return alexaDevServer.hooks['local-alexa-server:start']()
   })
 
   it('should start a server with a custom port', () => {
     alexaDevServer = new AlexaDevServer(serverless)
     // TODO: Write tests
-    return alexaDevServer.hooks['alexa-dev-server:start']()
+    return alexaDevServer.hooks['local-alexa-server:start']()
   })
 
   it('should not start a server if no alexa-functions are specified', () => {
     alexaDevServer = new AlexaDevServer(serverless)
     // TODO: Write tests
-    return alexaDevServer.hooks['alexa-dev-server:start']()
+    return alexaDevServer.hooks['local-alexa-server:start']()
   })
 
   it('should handle requests', () => {
     alexaDevServer = new AlexaDevServer(serverless)
     // TODO: Write tests
-    return alexaDevServer.hooks['alexa-dev-server:start']()
+    return alexaDevServer.hooks['local-alexa-server:start']()
   })
 })
