@@ -21,7 +21,7 @@ npm install git+ssh@bitbucket.org:dieproduktmachergmbh/serverless-local-alexa-se
 ```yaml
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
 
 functions:
   hello:
