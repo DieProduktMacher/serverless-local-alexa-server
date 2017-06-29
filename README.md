@@ -21,7 +21,7 @@ npm install git+ssh@bitbucket.org:dieproduktmachergmbh/serverless-local-alexa-se
 ```yaml
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
 
 functions:
   hello:
@@ -69,7 +69,7 @@ As method for SSL Certificate validation select *My development endpoint is a su
 
 # TODO
 
-* Automatic tests
+* Automated tests
 
 
 # License & Credits
