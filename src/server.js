@@ -16,15 +16,17 @@ const getEndpoints = (serverlessConfig, servicePath) => {
       lambdaName: lambda.name,
       path: `/${lambda.name}`,
       modulePath: path.join(servicePath, handlerParts[0]),
-      functionName: handlerParts[1]
+      functionName: handlerParts[1],
+      environment: Object.assign({}, serverlessConfig.provider.environment, lambda.config.environment)
     }
   })
 }
 
 // Executes the lambda function behind an endpoint
-const executeLambda = (endpoint, request) => {
+const executeLambda = (endpoint, request, defaultEnvironment) => {
   return new Promise((resolve, reject) => {
     let lambdaFunction = require(endpoint.modulePath)[endpoint.functionName]
+    process.env = Object.assign({}, endpoint.environment, defaultEnvironment)
     lambdaFunction(request.body, { succeed: resolve, fail: reject })
   })
 }
@@ -36,11 +38,15 @@ module.exports.start = (options, log) => {
     log('No Lambdas with Alexa events found')
     return
   }
+
+  process.env.IS_OFFLINE = true
+  let defaultEnvironment = Object.assign({}, process.env)
+
   let app = Express()
   app.use(BodyParser.json())
   endpoints.forEach(endpoint => {
     app.post(endpoint.path, (request, response) => {
-      executeLambda(endpoint, request).then(result => {
+      executeLambda(endpoint, request, defaultEnvironment).then(result => {
         log(`Responded to ${endpoint.lambdaName}`)
         response.send(result)
       }).catch(error => {

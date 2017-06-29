@@ -70,7 +70,6 @@ As method for SSL Certificate validation select *My development endpoint is a su
 # TODO
 
 * Automated tests
-* Support for environment variables
 
 
 # License & Credits
