@@ -67,11 +67,6 @@ In the Configuration pane, select HTTPS as service endpoint type and specify the
 As method for SSL Certificate validation select *My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority*.
 
 
-# TODO
-
-* Automated tests
-
-
 # License & Credits
 
 Licensed under the MIT license.
