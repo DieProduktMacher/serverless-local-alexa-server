@@ -2,7 +2,6 @@
 const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 const fetch = require('node-fetch')
-const path = require('path')
 const sinon = require('sinon')
 const Serverless = require('serverless/lib/Serverless')
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider')
@@ -15,7 +14,14 @@ describe('index.js', () => {
   var sandbox, serverless, alexaDevServer
 
   const sendAlexaRequest = (port) => {
-    return fetch(`http://localhost:${port}/MyAlexaSkill`, { method: 'POST', body: '{}' })
+    return fetch(`http://localhost:${port}/MyAlexaSkill`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: '{"session":{},"request":{},"version":"1.0"}'
+    })
   }
 
   beforeEach(() => {
@@ -24,7 +30,7 @@ describe('index.js', () => {
     serverless = new Serverless()
     serverless.init()
     serverless.setProvider('aws', new AwsProvider(serverless))
-    serverless.config.servicePath = path.join(__dirname, '../test-service')
+    serverless.config.servicePath = __dirname
   })
 
   afterEach((done) => {
@@ -40,11 +46,11 @@ describe('index.js', () => {
   it('should start a server and accept requests', () => {
     serverless.service.functions = {
       'MyAlexaSkill': {
-        handler: 'handler.alexaSkill',
+        handler: 'lambda-handler.alexaSkill',
         events: [ 'alexaSkill' ]
       },
       'SomeOtherFunction': {
-        handler: 'handler.empty',
+        handler: 'lambda-handler.empty',
         events: [ ]
       }
     }
@@ -58,7 +64,7 @@ describe('index.js', () => {
   it('should start a server with a custom port and accept requests', () => {
     serverless.service.functions = {
       'MyAlexaSkill': {
-        handler: 'handler.alexaSkill',
+        handler: 'lambda-handler.alexaSkill',
         events: [ 'alexaSkill' ]
       }
     }
@@ -70,13 +76,13 @@ describe('index.js', () => {
   })
 
   it('should set environment variables correctly', () => {
-    serverless.service.environment = {
+    serverless.service.provider.environment = {
       foo: 'bar',
       bla: 'blub'
     }
     serverless.service.functions = {
       'MyAlexaSkill': {
-        handler: 'handler.mirrorEnv',
+        handler: 'lambda-handler.mirrorEnv',
         events: [ 'alexaSkill' ],
         environment: {
           foo: 'baz'
@@ -97,7 +103,7 @@ describe('index.js', () => {
   it('should not start a server if no alexa-functions are specified', () => {
     serverless.service.functions = {
       'SomeHttpFunction': {
-        handler: 'handler.empty',
+        handler: 'lambda-handler.succeed',
         events: [ 'http' ]
       }
     }
@@ -109,8 +115,8 @@ describe('index.js', () => {
 
   it('should handle failures', () => {
     serverless.service.functions = {
-      'SomeHttpFunction': {
-        handler: 'handler.fail',
+      'MyAlexaSkill': {
+        handler: 'lambda-handler.fail',
         events: [ 'alexaSkill' ]
       }
     }
