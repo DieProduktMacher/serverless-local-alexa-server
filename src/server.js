@@ -52,7 +52,7 @@ module.exports.start = (options, log) => {
       }).catch(error => {
         log(`Error responding to ${endpoint.lambdaName}:`)
         log(`  ${error}`)
-        response.send(error)
+        response.status(500).send(error)
       })
     })
   })
