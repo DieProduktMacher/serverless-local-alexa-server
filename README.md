@@ -13,7 +13,7 @@ This package requires node >= 6.0
 ### 1. Install the plugin
 
 ```sh
-npm install git+ssh@github.com:DieProduktMacher/serverless-local-alexa-server.git --save-dev
+npm install serverless-local-alexa-server --save-dev
 ```
 
 ### 2. Add the plugin to your serverless configuration file
