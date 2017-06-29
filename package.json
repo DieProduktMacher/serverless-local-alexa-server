@@ -4,7 +4,7 @@
   "engines": {
     "node": ">=6.0"
   },
-  "description": "Develop an Alexa skill without deploying to AWS",
+  "description": "Develop an Alexa skill in Serverless without deploying to AWS",
   "author": "DieProduktMacher <www.dieproduktmacher.com>",
   "license": "MIT",
   "repository": {
@@ -16,6 +16,7 @@
     "serverless-plugin",
     "alexa",
     "development",
+    "dev",
     "local",
     "aws-lambda"
   ],
