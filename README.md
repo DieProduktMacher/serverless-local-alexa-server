@@ -1,7 +1,7 @@
 Serverless Local Alexa Server Plugin (Beta)
 =======
 
-[![Build Status](https://travis-ci.org/DieProduktMacher/serverless-local-alexa-server.svg?branch=master)](https://travis-ci.org/DieProduktMacher/serverless-local-alexa-server)
+[![Build Status](https://travis-ci.org/DieProduktMacher/serverless-local-alexa-server.svg?branch=develop)](https://travis-ci.org/DieProduktMacher/serverless-local-alexa-server)
 
 This plugin exposes your Alexa skill functions as local HTTP endpoints, removing the need to deploy every change to AWS Lambda. You can connect these endpoints to your Alexa skill to via forwardhq, ngrok or any other forwarding tool.
 
